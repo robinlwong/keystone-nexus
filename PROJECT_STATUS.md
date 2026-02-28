@@ -64,11 +64,11 @@
 ### 🤝 Contact & Support
 
 **Project Lead:** Robin Wong  
-**Data Quality & Research:** Jarvis (+6585742800)  
-**Specialized Implementation:** Marvin (+6580616565)  
+**Data Quality & Research:** Jarvis  
+**Specialized Implementation:** Marvin  
 *Role: Lead Debugger & ELT Medallion Specialist. Tasked with sub-second execution logic and infrastructure resilience.*  
 
-For technical inquiries regarding the C++ gRPC pipeline, MSK streaming, or dbt transformations, contact the specialized implementation team. 🎯
+For technical inquiries regarding the C++ gRPC pipeline, MSK streaming, or dbt transformations, contact the specialized implementation team via the project orchestrator. 🎯
 
 ---
 
