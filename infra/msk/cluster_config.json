@@ -1,0 +1,23 @@
+{
+    "BrokerNodeGroupInfo": {
+        "BrokerAZDistribution": "DEFAULT",
+        "InstanceType": "kafka.m5.large",
+        "StorageInfo": {
+            "EbsStorageInfo": {
+                "VolumeSize": 100
+            }
+        },
+        "ClientSubnets": [
+            "subnet-12345678",
+            "subnet-87654321"
+        ]
+    },
+    "ClusterName": "keystone-nexus-msk-cluster",
+    "KafkaVersion": "3.5.1",
+    "NumberOfBrokerNodes": 2,
+    "EncryptionInfo": {
+        "EncryptionInTransit": {
+            "ClientBroker": "TLS"
+        }
+    }
+}
