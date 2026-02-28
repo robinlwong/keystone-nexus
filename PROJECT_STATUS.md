@@ -45,7 +45,7 @@
 - **Validation:** Great Expectations & dbt-expectations.
 
 **Gold Layer:** Business-ready aggregations (Athena Tables)
-- **Logic:** Star schema optimized for BI and analytics.
+- **Logic:** Star schema optimized for BI and analytics (6 core models).
 
 ---
 
