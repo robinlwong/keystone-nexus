@@ -2,6 +2,11 @@
 
 All notable changes to the Keystone Nexus project will be documented in this file.
 
+## [1.2.0] - 2026-02-28
+### Added
+- **AWS Glue Schema Registry Integration:** Implemented data contract enforcement in `src/streaming/msk_producer_glue.py` and `src/ingestion/olist_lakehouse_enterprise_glue.py`.
+- **Dynamic Schema Validation:** Automated schema registration and validation for MSK streaming events.
+
 ## [1.1.0] - 2026-02-28
 ### Added
 - **dbt Marts Layer:** Implemented full Star Schema with `dim_customer`, `dim_product`, `dim_seller`, `dim_date`, `fact_sales`, and `fact_reviews`.
