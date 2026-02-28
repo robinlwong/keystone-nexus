@@ -19,5 +19,6 @@ models:
       +materialized: view
       +schema: silver
     marts:
-      +materialized: table
+      +materialized: incremental
+      +incremental_strategy: append
       +schema: gold

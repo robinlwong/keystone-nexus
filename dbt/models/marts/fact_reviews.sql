@@ -18,4 +18,8 @@ SELECT
     r.review_creation_timestamp,
     r.review_answer_timestamp
 FROM reviews r
-LEFT JOIN orders o ON r.order_id = o.order_id
+LEFT JOIN orders o ON r.id = o.id
+-- ATHENA PARTITIONING: Filter by year/month/day to minimize scan costs
+WHERE r.year = {{ var('target_year', format_date(current_timestamp(), '%Y')) }}
+  AND r.month = {{ var('target_month', format_date(current_timestamp(), '%m')) }}
+  AND r.day = {{ var('target_day', format_date(current_timestamp(), '%d')) }}
