@@ -2,6 +2,11 @@
 
 All notable changes to the Keystone Nexus project will be documented in this file.
 
+## [1.3.0] - 2026-02-28
+### Added
+- **Athena Partitioning Logic:** Implemented non-negotiable cost mitigation by bounding `fact_sales` and `fact_reviews` to specific `year/month/day` partitions.
+- **Incremental Materialization:** Updated `dbt_project.yml` to use incremental materialization for Gold layer tables to further reduce scan volume.
+
 ## [1.2.0] - 2026-02-28
 ### Added
 - **AWS Glue Schema Registry Integration:** Implemented data contract enforcement in `src/streaming/msk_producer_glue.py` and `src/ingestion/olist_lakehouse_enterprise_glue.py`.
