@@ -1,75 +1,82 @@
 # Keystone Nexus
 
-**NTU M2G6 Module - Data Engineering Project**
-
----
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![dbt](https://img.shields.io/badge/dbt-1.7.0-orange)
 
 ## 📋 Project Overview
+Keystone Nexus is a comprehensive data engineering project developed for the **NTU M2G6 Data Engineering** group project. The system implements a modern data lakehouse architecture using the **Medallion Architecture** (Bronze, Silver, Gold layers) to process and analyze the Brazilian E-Commerce dataset (Olist).
 
-Keystone Nexus is a comprehensive data engineering solution developed for the NTU Advanced Professional Certificate in Data Science and AI (M2G6 Module).
+The project focuses on building a scalable, automated ELT pipeline that transforms raw transactional data into business-ready insights while ensuring high data quality through automated validation frameworks.
 
-**Status:** 🔧 Under Development
-
----
-
-## 📚 Course Materials
-
-Course materials and documentation are stored in `~/knowledge/keystone-nexus/`
-
-**Module Topics:**
-- 2.1: Introduction to Big Data and Data Engineering
-- 2.2: Data Architecture
-- 2.3: Data Encoding and Data Flow
-- 2.4: Data Extraction and Web Scraping
-- 2.5: Data Warehouse
-- 2.6: Data Pipelines and Orchestration
-- 2.7: Data Orchestration and Testing
-- 2.8: Out of Core/Memory Processing
-- 2.9: Big Data Ecosystem and Batch Processing
-- 2.10: Event Streaming and Stream Processing
-
----
+### Tech Stack
+- **Infrastructure:** AWS S3, AWS Athena
+- **Orchestration:** Apache Airflow
+- **Transformation:** dbt (Data Build Tool)
+- **Data Quality:** Great Expectations & `dbt-expectations`
+- **Data Source:** Olist Brazilian E-Commerce (CSV/Parquet)
 
 ## 🏗️ Architecture
 
-*To be populated after code review*
+### Medallion Architecture Flow
+1.  **Bronze (Raw):** 1:1 ingestion from CSV to Parquet on S3. No cleaning or transformation.
+2.  **Silver (Cleansed):** Data is cleaned, typed, and partitioned. **Great Expectations** validates schema and business rules here.
+3.  **Gold (Curated):** Star schema implementation (Fact and Dimension tables) optimized for BI and analytics.
 
----
+### Data Flow Diagram
+`Source CSV` ➔ `Airflow DAG` ➔ `S3 Bronze` ➔ `dbt Transformation (Silver)` ➔ `dbt Marts (Gold)` ➔ `Athena / BI`
 
-## 🚀 Deployment
+## 🚀 Quick Start
 
-**Target Platform:** AWS
+### Prerequisites
+- Python 3.11+
+- AWS CLI (configured with appropriate IAM permissions)
+- dbt Core (with Athena adapter)
+- Apache Airflow
 
-*Deployment plan to be finalized after code review*
+### Setup Instructions
+1.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/robinlwong/keystone-nexus.git
+    cd keystone-nexus
+    ```
+2.  **Install Dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  **Initialize dbt:**
+    ```bash
+    cd dbt
+    dbt deps
+    ```
 
----
+### Running the Pipeline
+- **Ingestion:** Run the Airflow DAG or manual ingestion script:
+    ```bash
+    python src/ingestion/ingest_to_bronze.py
+    ```
+- **Transformations:** Execute the Medallion pipeline:
+    ```bash
+    dbt run
+    ```
+- **Validation:** Run data quality tests:
+    ```bash
+    dbt test
+    ```
 
-## 📂 Project Structure
+## 📊 Data Quality
+Data quality is enforced at every layer:
+- **Great Expectations:** Used for complex cross-column validation and generating Data Docs.
+- **dbt-expectations:** Integrated directly into the dbt models for real-time schema and value constraints validation.
 
-```
-keystone-nexus/
-├── README.md
-├── .gitignore
-├── requirements.txt (pending)
-├── src/ (pending)
-├── data/ (pending)
-├── config/ (pending)
-└── tests/ (pending)
-```
+## 📁 Project Structure
+- `dbt/`: dbt project configuration, models, and tests.
+- `src/`: Ingestion and validation source code.
+- `dags/`: Airflow DAG definitions for orchestration.
+- `docs/`: Architectural documentation and design decisions.
 
----
+## 🤝 Contributors
+- **NTU M2G6 Team**
 
-## 🛠️ Setup
-
-*Instructions to be added*
-
----
-
-## 👥 Team
-
-- **Lead:** Jarvis (OpenClaw Agent)
-- **Owner:** Robin Wong
-
----
-
-**Last Updated:** 2026-02-27
+## 📄 License
+This project is licensed under the MIT License.

@@ -1,0 +1,23 @@
+name: 'keystone_nexus'
+version: '1.0.0'
+config-version: 2
+
+profile: 'keystone_nexus_athena'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+
+models:
+  keystone_nexus:
+    staging:
+      +materialized: view
+      +schema: silver
+    intermediate:
+      +materialized: view
+      +schema: silver
+    marts:
+      +materialized: table
+      +schema: gold
