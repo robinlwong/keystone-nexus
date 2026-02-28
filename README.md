@@ -11,16 +11,16 @@ Keystone Nexus is a comprehensive data engineering project developed for the **N
 Recently, the project pivoted from a batch-centric model to a **real-time streaming architecture** leveraging **AWS MSK**.
 
 ### Tech Stack
-- **Infrastructure:** AWS S3, AWS Athena, **AWS MSK (Kafka)**
+- **Infrastructure:** AWS S3, AWS Athena, **AWS MSK (Kafka)**, **AWS Glue Schema Registry**
 - **Orchestration:** Apache Airflow
 - **Transformation:** dbt (Data Build Tool)
-- **Data Quality:** Great Expectations & `dbt-expectations`
+- **Data Quality:** Great Expectations, `dbt-expectations`, **AWS Glue (Data Contracts)**
 - **Data Source:** Olist Brazilian E-Commerce (CSV/Parquet/Streams)
 
 ## 🏗️ Architecture
 
 ### Medallion Architecture Flow
-1.  **Bronze (Raw):** 1:1 ingestion via **AWS MSK Connect** (Stream) or Python Ingestion (Batch) to S3.
+1.  **Bronze (Raw):** 1:1 ingestion via **AWS MSK Connect** (Stream) or Python Ingestion (Batch) to S3. All streaming data is validated against **AWS Glue Schema Registry**.
 2.  **Silver (Cleansed):** Cleaned, typed, and partitioned data. **Great Expectations** validates rules here.
 3.  **Gold (Curated):** Star schema implementation (Fact and Dimension tables) optimized for BI.
 
