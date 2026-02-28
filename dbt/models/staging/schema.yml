@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Staging layer for Olist orders"
+    columns:
+      - name: order_id
+        description: "Primary key"
+        tests:
+          - not_null
+          - unique
+      
+      - name: order_status
+        tests:
+          - accepted_values:
+              values: ['created', 'approved', 'invoiced', 'processing',
+                       'shipped', 'delivered', 'unavailable', 'canceled']
+      
+      - name: order_purchase_timestamp
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: "2016-01-01"
+              max_value: "CURRENT_DATE"
