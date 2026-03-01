@@ -65,6 +65,7 @@ Data quality is enforced via **Great Expectations** for complex validation and *
 
 - `docs/`: Architecture docs, including the **MSK Pivot strategy**.
 - `docs/TECH_STACK.md`: Comprehensive overview of AWS services and software frameworks.
+- `docs/DATABASE_STRATEGY.md`: Details on Amazon RDS Proxy for connection pooling and failover resilience.
 - `CHANGELOG.md`: Detailed history of project evolution and implementation phases.
 
 ## 🤝 Contributors

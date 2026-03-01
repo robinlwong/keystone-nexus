@@ -2,6 +2,11 @@
 
 All notable changes to the Keystone Nexus project will be documented in this file.
 
+## [1.5.0] - 2026-03-01
+### Added
+- **Amazon RDS Proxy Integration:** Implemented connection pooling configuration (`infra/rds/proxy_config.json`) to prevent connection exhaustion during high-throughput operational query spikes.
+- **Database Strategy Documentation:** Created `docs/DATABASE_STRATEGY.md` detailing the transition from direct DB access to proxied multiplexing.
+
 ## [1.4.0] - 2026-03-01
 ### Added
 - **Intermediate Layer (`int_orders_joined.sql`):** Implemented a "Wide Table" to resolve complex 1-to-many relationships (Orders → Items/Payments) before Gold aggregation.
