@@ -68,6 +68,7 @@ Data quality is enforced via **Great Expectations** for complex validation and *
 - `src/`: Ingestion, **streaming producers**, and validation code.
 - `infra/`: **AWS MSK cluster configurations**.
 - `docs/`: Architecture docs, including the **MSK Pivot strategy**.
+- `CHANGELOG.md`: Detailed history of project evolution and implementation phases.
 
 ## 🤝 Contributors
 - **NTU M2G6 Team**
