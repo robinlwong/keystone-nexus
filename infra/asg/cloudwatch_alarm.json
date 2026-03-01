@@ -1,0 +1,24 @@
+{
+    "AlarmName": "KeystoneKafkaConsumerLagHigh",
+    "AlarmDescription": "Scales out workers when Kafka consumer lag exceeds 5000 messages",
+    "MetricName": "ConsumerLag",
+    "Namespace": "AWS/Kafka",
+    "Statistic": "Average",
+    "Period": 60,
+    "Threshold": 5000,
+    "ComparisonOperator": "GreaterThanThreshold",
+    "Dimensions": [
+        {
+            "Name": "Cluster Name",
+            "Value": "keystone-nexus-msk-cluster"
+        },
+        {
+            "Name": "Consumer Group",
+            "Value": "lakehouse-enterprise-writers"
+        }
+    ],
+    "EvaluationPeriods": 2,
+    "AlarmActions": [
+        "arn:aws:autoscaling:ap-southeast-1:123456789012:scalingPolicy:..."
+    ]
+}
