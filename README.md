@@ -63,11 +63,8 @@ Recently, the project pivoted from a batch-centric model to a **real-time stream
 ## 📊 Data Quality
 Data quality is enforced via **Great Expectations** for complex validation and **dbt-expectations** for model-level constraints.
 
-## 📁 Project Structure
-- `dbt/`: dbt project configuration and models.
-- `src/`: Ingestion, **streaming producers**, and validation code.
-- `infra/`: **AWS MSK cluster configurations**.
 - `docs/`: Architecture docs, including the **MSK Pivot strategy**.
+- `docs/TECH_STACK.md`: Comprehensive overview of AWS services and software frameworks.
 - `CHANGELOG.md`: Detailed history of project evolution and implementation phases.
 
 ## 🤝 Contributors
