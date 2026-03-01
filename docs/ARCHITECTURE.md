@@ -13,11 +13,13 @@ The system is built on the **Data Lakehouse** paradigm, combining the flexibilit
 - **Logic:** Raw ingestionlanding zone. This layer stores an immutable 1:1 replica of source data from CSV ingestion or MSK streams.
 - **Components:** `ingest_to_bronze.py`, `msk_producer.py`.
 
-### 2. Silver Layer (Cleansed)
+### 2. Silver Layer (Cleansed & Joined)
 - **Format:** Parquet (Partitioned by `year/month/day`)
 - **Storage:** `s3://olist-data-lake-silver/`
-- **Logic:** Data cleaning, type casting, and de-duplication. This layer serves as the "single source of truth" for the enterprise.
-- **Components:** `olist_lakehouse_enterprise.py`, `dbt/models/staging/`.
+- **Logic:** 
+  - **Staging:** Data cleaning, type casting, and de-duplication (`stg_*` models).
+  - **Intermediate:** Complex joins across the 9-file dataset (e.g., `int_orders_joined`). This layer resolves 1-to-many fan-out risks before final aggregation.
+- **Components:** `olist_lakehouse_enterprise.py`, `dbt/models/staging/`, `dbt/models/intermediate/`.
 
 ### 3. Gold Layer (Curated)
 - **Format:** Athena Tables
