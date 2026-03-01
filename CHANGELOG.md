@@ -2,6 +2,12 @@
 
 All notable changes to the Keystone Nexus project will be documented in this file.
 
+## [1.6.0] - 2026-03-01
+### Added
+- **Auto Scaling Strategy:** Implemented AWS Auto Scaling Group (ASG) configuration (`infra/asg/asg_config.json`) for Python worker elasticity.
+- **CloudWatch Monitoring:** Added CloudWatch alarm configuration (`infra/asg/cloudwatch_alarm.json`) to trigger scaling based on Kafka Consumer Lag.
+- **Resilience Documentation:** Created `docs/RESILIENCE_STRATEGY.md` detailing the integration between ASG compute elasticity and Airflow data fidelity orchestration.
+
 ## [1.5.0] - 2026-03-01
 ### Added
 - **Amazon RDS Proxy Integration:** Implemented connection pooling configuration (`infra/rds/proxy_config.json`) to prevent connection exhaustion during high-throughput operational query spikes.
