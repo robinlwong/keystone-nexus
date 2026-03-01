@@ -2,6 +2,12 @@
 
 All notable changes to the Keystone Nexus project will be documented in this file.
 
+## [1.4.0] - 2026-03-01
+### Added
+- **Intermediate Layer (`int_orders_joined.sql`):** Implemented a "Wide Table" to resolve complex 1-to-many relationships (Orders → Items/Payments) before Gold aggregation.
+- **Staging Models:** Added `stg_order_payments.sql` and `stg_geolocation.sql` to support revenue reconciliation and geospatial analysis.
+- **Gap Analysis Report:** Created `docs/IMPLEMENTATION_GAP_ANALYSIS.md` detailing the strategy for joining 9 disparate datasets and justifying dbt tooling decisions.
+
 ## [1.3.0] - 2026-02-28
 ### Added
 - **Athena Partitioning Logic:** Implemented non-negotiable cost mitigation by bounding `fact_sales` and `fact_reviews` to specific `year/month/day` partitions.

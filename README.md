@@ -21,7 +21,7 @@ Recently, the project pivoted from a batch-centric model to a **real-time stream
 
 ### Medallion Architecture Flow
 1.  **Bronze (Raw):** 1:1 ingestion via **AWS MSK Connect** (Stream) or Python Ingestion (Batch) to S3. All streaming data is validated against **AWS Glue Schema Registry**.
-2.  **Silver (Cleansed):** Cleaned, typed, and partitioned data. **Great Expectations** validates rules here.
+2.  **Silver (Cleansed):** Cleaned, typed, and partitioned data. Includes an **Intermediate Layer** to pre-join complex relationships (Orders + Payments + Items). **Great Expectations** validates rules here.
 3.  **Gold (Curated):** Star schema implementation (Fact and Dimension tables) optimized for BI.
 
 ### Data Flow Diagram
