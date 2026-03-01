@@ -1,0 +1,23 @@
+{
+    "DBProxyName": "keystone-nexus-proxy",
+    "EngineFamily": "POSTGRESQL",
+    "Auth": [
+        {
+            "Description": "RDS Proxy authentication via Secrets Manager",
+            "AuthScheme": "SECRETS",
+            "SecretArn": "arn:aws:secretsmanager:ap-southeast-1:123456789012:secret:rds-db-credentials",
+            "IAMAuth": "DISABLED"
+        }
+    ],
+    "RoleArn": "arn:aws:iam::123456789012:role/service-role/rds-proxy-role",
+    "VpcSubnetIds": [
+        "subnet-12345678",
+        "subnet-87654321"
+    ],
+    "VpcSecurityGroupIds": [
+        "sg-12345678"
+    ],
+    "RequireTLS": true,
+    "IdleClientTimeout": 1800,
+    "DebugLogging": false
+}
