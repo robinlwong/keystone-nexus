@@ -138,6 +138,7 @@ Fact Tables:
   - Data flow (Source → Bronze → Silver → Gold → Analytics)
   - AWS service interaction diagram
   - Star schema ERD
+- **Observability:** Node.js/TypeScript dashboard for real-time MSK stream monitoring (**Standardized on pnpm**)
 - **Data Lineage:** dbt docs (automatically generated)
 - **Technical Report:** Markdown document covering:
   - Tool selection rationale (why Athena over Redshift)

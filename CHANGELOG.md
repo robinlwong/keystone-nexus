@@ -2,6 +2,12 @@
 
 All notable changes to the Keystone Nexus project will be documented in this file.
 
+## [1.7.0] - 2026-03-02
+### Added
+- **Ecosystem Tooling Standardization:** Formally adopted `pnpm` as the mandatory package manager for all Node.js/TypeScript observability dashboards and API gateways.
+- **Dashboard Scaffold:** Initialized `src/dashboard/package.json` with `pnpm` engine constraints to ensure consistent, disk-efficient dependency management on AWS EC2.
+- **Documentation Update:** Updated `README.md` and `IMPLEMENTATION_PLAN.md` to reflect `pnpm` standardization for the frontend/observability layer.
+
 ## [1.6.0] - 2026-03-01
 ### Added
 - **Auto Scaling Strategy:** Implemented AWS Auto Scaling Group (ASG) configuration (`infra/asg/asg_config.json`) for Python worker elasticity.

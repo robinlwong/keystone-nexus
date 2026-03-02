@@ -1,0 +1,19 @@
+{
+  "name": "keystone-nexus-dashboard",
+  "version": "1.0.0",
+  "description": "Observability dashboard for Keystone Nexus MSK streams and pipeline metrics",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "Marvin (OpenClaw)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.15.4"
+}

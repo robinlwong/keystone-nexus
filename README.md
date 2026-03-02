@@ -13,6 +13,7 @@ Recently, the project pivoted from a batch-centric model to a **real-time stream
 ### Tech Stack
 - **Infrastructure:** AWS S3, AWS Athena, **AWS MSK (Kafka)**, **AWS Glue Schema Registry**
 - **Orchestration:** Apache Airflow
+- **Visualization:** Node.js/TypeScript Observability Dashboard (**pnpm**)
 - **Transformation:** dbt (Data Build Tool)
 - **Data Quality:** Great Expectations, `dbt-expectations`, **AWS Glue (Data Contracts)**
 - **Data Source:** Olist Brazilian E-Commerce (CSV/Parquet/Streams)
@@ -44,6 +45,10 @@ Recently, the project pivoted from a batch-centric model to a **real-time stream
 2.  **Initialize dbt:**
     ```bash
     cd dbt && dbt deps
+    ```
+3.  **Setup Dashboard (Frontend):**
+    ```bash
+    cd src/dashboard && pnpm install
     ```
 
 ### Running the Pipeline
