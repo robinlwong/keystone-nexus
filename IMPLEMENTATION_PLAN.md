@@ -212,38 +212,50 @@ Fact Tables:
 
 ## Implementation Phases
 
-### Phase 1: Foundation (Week 1)
-**Goal:** Setup AWS infrastructure and ingest raw data
+### Phase 1: Foundation (Week 1) - ✅ REMEDIED
+**Goal:** Setup AWS infrastructure and ingest raw data. Initial deficiencies addressed:
+1. **RDS Connection Exhaustion:** Remedied via AWS RDS Proxy connection multiplexing (v1.5.0).
+2. **Compute Elasticity:** Remedied via Auto Scaling Groups and CloudWatch triggers for Kafka scale-out (v1.6.0).
+3. **CI/CD Performance:** Remedied via pnpm standardization for dashboard deployment (v1.7.0).
 
 **Tasks:**
 1. ✅ Create GitHub repository (`keystone-nexus`)
 2. ✅ Setup AWS account and IAM roles
 3. ✅ Create S3 buckets (bronze, silver, gold, quarantine)
-4. ⏳ Download Olist dataset (9 CSV files)
-5. ⏳ Write Python ingestion script (`src/ingestion/ingest_to_bronze.py`)
-6. ⏳ Upload CSV → Parquet to Bronze bucket
-7. ⏳ Setup AWS Glue Catalog and Athena database
+4. ✅ Implement AWS RDS Proxy connection pooling (v1.5.0)
+5. ✅ Configure ASG with CloudWatch monitoring for Kafka Consumer Lag (v1.6.0)
+6. ✅ Initialize pnpm-based dashboard scaffold for CI/CD optimization (v1.7.0)
+7. ⏳ Download Olist dataset (9 CSV files)
+8. ⏳ Write Python ingestion script (`src/ingestion/ingest_to_bronze.py`)
+9. ⏳ Upload CSV → Parquet to Bronze bucket
+10. ⏳ Setup AWS Glue Catalog and Athena database
 
 **Deliverables:**
 - S3 bucket structure
 - Bronze layer populated with Parquet files
 - Athena database schema
+- **Resilience Docs:** `docs/RESILIENCE_STRATEGY.md`, `docs/DATABASE_STRATEGY.md`
 
-### Phase 2: Data Warehouse Design (Week 1-2)
-**Goal:** Transform Bronze → Silver → Gold with star schema
+### Phase 2: Data Warehouse Design (Week 1-2) - ✅ REMEDIED
+**Goal:** Transform Bronze → Silver → Gold with star schema and data quality gates. Key deficiencies addressed:
+1. **MWAA Worker OOM:** Remedied via Athena compute pushdown for Great Expectations (v1.8.0).
+2. **Silent Schema Drift:** Remedied via AWS Glue Schema Registry data contracts at ingestion (v2.0.0).
+3. **Manual Cleanup Burden:** Remedied via Dead Letter Quarantine (DLQ) branching in Airflow DAG (v2.1.0).
 
 **Tasks:**
 1. ⏳ Design star schema (dimension and fact tables)
 2. ⏳ Write dbt models or PySpark transformations
-3. ⏳ Implement data cleaning logic
-4. ⏳ Create derived columns (delivery_days, customer_lifetime_value)
-5. ⏳ Partition Gold tables by date
-6. ⏳ Test queries in Athena
+3. ✅ Implement Athena compute pushdown for DQ validation (v1.8.0)
+4. ✅ Integrate AWS Glue Schema Registry for gRPC/Kafka ingestion layer (v2.0.0)
+5. ✅ Implement Airflow branching for automated Dead Letter Quarantine (v2.1.0)
+6. ⏳ Partition Gold tables by date
+7. ⏳ Test queries in Athena
 
 **Deliverables:**
 - dbt project structure (`models/silver/`, `models/gold/`)
 - Star schema implemented in Athena
-- Documentation (`docs/schema_design_rationale.md`)
+- `dags/olist_resilient_pipeline.py` (DLQ-enabled)
+- `infra/glue/registry_config.json`
 
 ### Phase 3: Data Quality & Orchestration (Week 2)
 **Goal:** Implement automated validation and pipeline scheduling
