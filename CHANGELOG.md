@@ -2,6 +2,12 @@
 
 All notable changes to the Keystone Nexus project will be documented in this file.
 
+## [2.2.0] - 2026-03-03
+### Added
+- **Strategic Control Documentation:** Formalized the "Strategic Recommendations & Deficiency Mitigations" across `README.md`, `IMPLEMENTATION_PLAN.md`, and `ARCHITECTURE.md`.
+- **Infrastructure Artifacts:** Added `infra/rds/proxy_config.json` defining the Amazon RDS Proxy connection pooling strategy.
+- **Resilience Blueprint:** Documented the CloudWatch-to-ASG scaling logic based on Kafka Consumer Lag.
+
 ## [2.1.0] - 2026-03-03
 ### Added
 - **Dead Letter Quarantine (DLQ) Path:** Implemented `dags/olist_resilient_pipeline.py` with a `BranchPythonOperator` for automated data quality routing.
