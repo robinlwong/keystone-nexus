@@ -63,7 +63,7 @@
 
 ### 🤝 Contact & Support
 
-**Project Lead:** Robin Wong  
+**Project Lead:** Robin L Wong  
 **Data Quality & Research:** Jarvis  
 **Specialized Implementation:** Marvin  
 *Role: Lead Debugger & ELT Medallion Specialist. Tasked with sub-second execution logic and infrastructure resilience.*  

@@ -11,6 +11,17 @@
 
 Keystone Nexus implements a scalable, enterprise-grade data lakehouse for Olist e-commerce analytics. The architecture combines high-performance C++ ingestion, Python-based ETL, serverless analytics, and automated data quality checks.
 
+### 💡 The Medallion Metaphor: A Water Filtration System
+To ensure high-integrity insights, we utilize a three-tier Medallion Architecture:
+1.  **Bronze Layer (Raw):** The raw rainwater—messy, unprocessed, but containing all original data.
+2.  **Silver Layer (Cleansed):** Filtered water—clean, normalized, and safe for transformation.
+3.  **Gold Layer (Curated):** Bottled mineral water—premium, business-ready star schemas optimized for executive decision-making.
+
+### 🛡️ Strategic Pillars
+- **The Data Bodyguard:** Great Expectations (GX) asserts data quality, preventing "Garbage In, Garbage Out" scenarios.
+- **Outsourced Heavy Lifting:** Athena Compute Pushdown offloads massive scanning to a giant "factory" (Athena), protecting the orchestrator (Airflow) from OOM crashes.
+- **The Master Archivist:** AWS Glue acts as our central librarian, ensuring every data point is indexed and discoverable across all tiers.
+
 **Key Differentiators:**
 - **Low-latency ingestion:** C++ gRPC → Kafka (microsecond response)
 - **Cost-optimized storage:** S3 Parquet with year/month/day partitioning
@@ -463,4 +474,4 @@ Fact Tables:
 
 **Status:** Ready to begin implementation  
 **Last Updated:** 2026-02-27  
-**Owner:** Jarvis (OpenClaw Agent) + Robin Wong
+**Owner:** Jarvis (OpenClaw Agent) + Robin L Wong

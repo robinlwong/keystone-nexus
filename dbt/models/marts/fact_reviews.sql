@@ -1,4 +1,10 @@
-{{ config(materialized='table') }}
+{{
+    config(
+        materialized='incremental',
+        incremental_strategy='append',
+        on_schema_change='fail'
+    )
+}}
 
 WITH reviews AS (
     SELECT * FROM {{ ref('stg_order_reviews') }}
