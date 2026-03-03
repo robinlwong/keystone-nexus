@@ -2,6 +2,12 @@
 
 All notable changes to the Keystone Nexus project will be documented in this file.
 
+## [2.1.0] - 2026-03-03
+### Added
+- **Dead Letter Quarantine (DLQ) Path:** Implemented `dags/olist_resilient_pipeline.py` with a `BranchPythonOperator` for automated data quality routing.
+- **Corrupted Data Isolation:** Corrupted or invalid Parquet files are now automatically moved from the Silver bucket to `s3://olist-data-lake-quarantine/` for manual review.
+- **Resilient Medallion Architecture:** Prevents the Gold analytical layer from being polluted by rejected data, ensuring a clean and reliable production environment.
+
 ## [2.0.0] - 2026-03-03
 ### Added
 - **AWS Glue Schema Registry Enforcement:** Implemented data contract enforcement at the gRPC/Kafka ingestion layer (`src/streaming/msk_producer_glue.py`).
