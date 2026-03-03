@@ -2,6 +2,18 @@
 
 All notable changes to the Keystone Nexus project will be documented in this file.
 
+## [2.0.0] - 2026-03-03
+### Added
+- **AWS Glue Schema Registry Enforcement:** Implemented data contract enforcement at the gRPC/Kafka ingestion layer (`src/streaming/msk_producer_glue.py`).
+- **Schema Drift Mitigation:** Integrated `aws-glue-schema-registry` to catch upstream column renames or type changes before bad data hits S3.
+- **Data Contract Infrastructure:** Added `infra/glue/registry_config.json` for central schema management.
+- **Architectural Shift:** Formally offloaded schema validation from Great Expectations (Silver layer) to the Producer (Ingestion layer), reducing pipeline downtime and rework.
+
+## [1.8.0] - 2026-03-02
+### Added
+- **Athena Compute Pushdown:** Implemented `src/validation/pushdown_athena_validation.py` to offload Great Expectations validation compute to AWS Athena via SQLAlchemy. This mitigates the "Compute Trap" where large Parquet files cause OOM crashes on MWAA worker nodes.
+- **Architectural Resilience:** Updated `IMPLEMENTATION_PLAN.md` to reflect the move away from in-memory Pandas validation toward serverless pushdown.
+
 ## [1.7.0] - 2026-03-02
 ### Added
 - **Ecosystem Tooling Standardization:** Formally adopted `pnpm` as the mandatory package manager for all Node.js/TypeScript observability dashboards and API gateways.

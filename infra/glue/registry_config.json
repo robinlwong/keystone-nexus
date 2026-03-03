@@ -1,0 +1,4 @@
+{
+    "RegistryName": "keystone-registry",
+    "Description": "Central Schema Registry for Keystone Nexus Medallion Architecture. Enforces data contracts at the ingestion layer to prevent downstream schema drift in Silver/Gold layers."
+}

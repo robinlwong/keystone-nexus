@@ -15,7 +15,7 @@ Keystone Nexus implements a scalable, enterprise-grade data lakehouse for Olist 
 - **Low-latency ingestion:** C++ gRPC → Kafka (microsecond response)
 - **Cost-optimized storage:** S3 Parquet with year/month/day partitioning
 - **Serverless analytics:** AWS Athena (pay-per-query, no cluster overhead)
-- **Data quality gates:** Great Expectations with Athena execution engine
+- **Data quality gates:** Great Expectations with Athena compute pushdown (prevents worker OOM)
 - **Resilient pipelines:** Dead letter quarantine for corrupted data
 
 ---
@@ -191,8 +191,9 @@ Fact Tables:
 
 ### Orchestration & Quality
 - **Workflow:** Apache Airflow (Amazon MWAA preferred)
-- **Data Quality:** Great Expectations
+- **Data Quality:** Great Expectations (SQLAlchemy/Athena pushdown), `dbt-expectations`, **AWS Glue (Data Contracts at Ingestion)**
 - **Monitoring:** CloudWatch, SNS alerts
+- **Schema Management:** AWS Glue Schema Registry for drift detection at the gRPC/Kafka layer
 
 ### Infrastructure (AWS)
 - **EC2:** Ubuntu 24.04 LTS (for Airflow, Python workers)
