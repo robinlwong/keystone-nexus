@@ -80,3 +80,29 @@ The Gold layer implements a traditional star schema to facilitate high-speed BI 
 - **Dimension Tables:** `dim_customer`, `dim_product`, `dim_seller`, `dim_date`.
 
 All models are materialized as tables in the `gold` schema, partitioned to optimize query performance.
+
+---
+
+## 📈 Strategic Recommendations & Deficiency Mitigations
+
+To ensure this Enterprise Lakehouse operates flawlessly at scale, the following architectural controls have been implemented:
+
+### 1. Schema Evolution (AWS Glue Schema Registry)
+- **Deficiency:** Hard-coded JSON parsing in the consumer is brittle. If the source platform updates an event payload, downstream Parquet files will be corrupted, breaking Athena queries.
+- **Remedy:** Leverage the **AWS Glue Schema Registry**. By connecting Kafka to this registry, payloads that violate the registered schema are rejected at the ingestion layer. This ensures downstream queries never fail due to unexpected structural changes.
+
+### 2. Cost Mitigation with Athena Partitioning
+- **Deficiency:** Athena charges per byte scanned ($5 per TB). Unbounded queries could scan the entire multi-year database, causing prohibitive costs.
+- **Remedy:** Mandatory **year/month/day partitioning**. By bounding SQL queries to specific partitions, scan volume is reduced by up to 98%, ensuring predictable cloud spend.
+
+### 3. RDS Connection Pooling (Amazon RDS Proxy)
+- **Deficiency:** Operational queries (e.g., shipment status checks) hit the RDS PostgreSQL database. Auto-scaling EC2 workers would rapidly exhaust the database's concurrent connection limit.
+- **Remedy:** Route all microservice connections through **Amazon RDS Proxy**. This service pools and shares database connections, preventing the DB from being overwhelmed during traffic spikes.
+
+### 4. Resilience (AWS ASG & Airflow Orchestration)
+- **Deficiency:** Static worker nodes cannot efficiently handle e-commerce traffic spikes without over-provisioning (wasting money) or under-provisioning (causing lag).
+- **Remedy:** Utilize **AWS Auto Scaling Groups** bound to **CloudWatch alarms** monitoring Kafka Consumer Lag. Instances scale-out automatically to catch up. This is orchestrated by **Apache Airflow (MWAA)** to guarantee data fidelity between layers.
+
+### 5. Ecosystem Tooling: Adopt pnpm
+- **Deficiency:** Standard package managers lead to disk bloat on EC2 and slow CI/CD pipeline builds.
+- **Remedy:** **Standardization on pnpm.** Utilizing a global content-addressable store on the OS minimizes disk usage and significantly accelerates AWS CodeBuild pipelines by eliminating redundant dependency downloads.

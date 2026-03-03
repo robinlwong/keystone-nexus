@@ -186,6 +186,32 @@ Fact Tables:
 
 ---
 
+## 📈 Strategic Recommendations & Deficiency Mitigations
+
+To ensure this Enterprise Lakehouse operates flawlessly at scale, the following architectural controls have been implemented/recommended:
+
+### 1. Schema Evolution (AWS Glue Schema Registry)
+- **Deficiency:** Hard-coded JSON parsing in consumers is brittle; upstream payload changes (e.g., coordinate types) would corrupt downstream Parquet files and break Athena queries.
+- **Remedy:** **AWS Glue Schema Registry Integration.** By connecting gRPC/Kafka ingestion to this registry, payloads violating the registered schema are rejected at the source. This guarantees structural integrity for all downstream analytics.
+
+### 2. Cost Mitigation with Athena Partitioning
+- **Deficiency:** Serverless analytical engines like Athena charge per byte scanned ($5/TB). Unbounded queries on a multi-year database cause massive cost overruns.
+- **Remedy:** **Non-negotiable year/month/day partitioning.** All ingestion logic and SQL queries are bounded to specific partitions, reducing data scan volume by up to 98% for date-specific reporting.
+
+### 3. RDS Connection Pooling (Amazon RDS Proxy)
+- **Deficiency:** High-throughput operational queries from auto-scaling EC2 workers would rapidly exhaust the PostgreSQL concurrent connection limits.
+- **Remedy:** **Amazon RDS Proxy Deployment.** All microservice connections are routed through a managed proxy that pools and shares database connections, preventing DB saturation during ingestion spikes.
+
+### 4. Resilience (AWS Auto Scaling Groups & Airflow Orchestration)
+- **Deficiency:** Static worker nodes lead to either expensive over-provisioning or data lag during e-commerce traffic spikes.
+- **Remedy:** **CloudWatch-triggered ASGs.** Bound EC2 Ubuntu instances to alarms monitoring **Kafka Consumer Lag**. Instances scale-out automatically when lag exceeds thresholds. This is coupled with **Apache Airflow (MWAA)** for rigid data fidelity orchestration between Medallion layers.
+
+### 5. Ecosystem Tooling: Adopt pnpm
+- **Deficiency:** Standard `npm` or `yarn` dependency management leads to bloated disk usage and slow CI/CD pipeline downloads.
+- **Remedy:** **Standardization on pnpm.** Utilizing a global content-addressable store on the OS minimizes EC2 disk usage and significantly accelerates AWS CodeBuild pipelines by eliminating redundant dependency downloads.
+
+---
+
 ## Technical Stack
 
 ### Data Storage & Lakehouse

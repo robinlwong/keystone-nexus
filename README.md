@@ -22,8 +22,15 @@ Recently, the project pivoted from a batch-centric model to a **real-time stream
 
 ### Medallion Architecture Flow
 1.  **Bronze (Raw):** 1:1 ingestion via **AWS MSK Connect** (Stream) or Python Ingestion (Batch) to S3. All streaming data is validated against **AWS Glue Schema Registry**.
-2.  **Silver (Cleansed):** Cleaned, typed, and partitioned data. Includes an **Intermediate Layer** to pre-join complex relationships (Orders + Payments + Items). **Great Expectations** validates rules here.
+2.  **Silver (Cleansed):** Cleaned, typed, and partitioned data. Includes an **Intermediate Layer** to pre-join complex relationships. **Great Expectations** validates rules here via **Athena Compute Pushdown**.
 3.  **Gold (Curated):** Star schema implementation (Fact and Dimension tables) optimized for BI.
+
+### Strategic Controls
+- **Schema Evolution:** Enforced via **AWS Glue Schema Registry**.
+- **Cost Mitigation:** Strict **Athena Partitioning** (year/month/day).
+- **RDS Pooling:** **Amazon RDS Proxy** for connection multiplexing.
+- **Compute Elasticity:** **AWS Auto Scaling Groups** triggered by Kafka Consumer Lag.
+- **Ecosystem Tooling:** Standardized on **pnpm** for disk-efficient, high-velocity CI/CD.
 
 ### Data Flow Diagram
 `Producer` ➔ `AWS MSK` ➔ `MSK Connect` ➔ `S3 Bronze` ➔ `dbt Transformation` ➔ `Athena / BI`
