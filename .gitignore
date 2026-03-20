@@ -136,3 +136,4 @@ htmlcov/
 *.temp
 tmp/
 temp/
+# Node.js\nnode_modules/\n.pnpm-store/\nnpm-debug.log\nyarn-error.log\n\n# dbt\ntarget/\ndbt_packages/\nlogs/
